@@ -76,6 +76,16 @@ export default function IndexPage() {
     setFileUploaded(base64);
   };
 
+  const isButtonDisabled = () => {
+    if (tabs[0] === method || tabs[2] === method) {
+      return !link;
+    }
+
+    if (tabs[1] === method) {
+      return !fileUploaded;
+    }
+  };
+
   return (
     <div className="bg-gray-100">
       <header>
@@ -173,7 +183,13 @@ export default function IndexPage() {
                   }}
                 />
               </div>
-              <button type="submit" className="nes-btn is-primary">
+              <button
+                type="submit"
+                className={`nes-btn ${
+                  isButtonDisabled() ? "is-disabled" : "is-primary"
+                }`}
+                disabled={isButtonDisabled()}
+              >
                 Pixel It
               </button>
             </form>
@@ -204,14 +220,20 @@ export default function IndexPage() {
                           ref={imageEl}
                           style={{ display: "none" }}
                         />
-                        <img
-                          src={
-                            method === tabs[0]
-                              ? originalData.urls.regular
-                              : image
-                          }
-                          alt=""
-                        />
+                        {method === tabs[0] && originalData ? (
+                          <>
+                            <img
+                              src={
+                                method === tabs[0]
+                                  ? originalData.urls.regular
+                                  : image
+                              }
+                              alt=""
+                            />
+                          </>
+                        ) : (
+                          <img src={image} />
+                        )}
                       </>
                     }
                     itemTwo={
@@ -219,7 +241,7 @@ export default function IndexPage() {
                     }
                   />
                 </div>
-                {method === tabs[0] ? (
+                {method === tabs[0] && originalData ? (
                   <p>
                     Photo by{" "}
                     <a
