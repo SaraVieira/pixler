@@ -14,6 +14,7 @@ export default function IndexPage() {
   const [image, setImage] = useState(null);
   const [scale, setScale] = useState(8);
   const [grayscale, setGrayscale] = useState(null);
+  const [originalData, setOriginalData] = useState(null);
   const [palette, setPalette] = useState(null);
 
   const canvas = useRef();
@@ -39,6 +40,7 @@ export default function IndexPage() {
     const data = await fetch(`api/photo/${id}`).then((rsp) => rsp.json());
     console.log(data);
     const dataUrl = await toDataURL(data.urls.regular);
+    setOriginalData(data);
     setImage(dataUrl);
     pixel();
   };
@@ -127,12 +129,33 @@ export default function IndexPage() {
                       />
                     }
                     position={20}
-                    itemOne={<img ref={imageEl} src={image} alt="" />}
+                    itemOne={
+                      <>
+                        <img
+                          src={image}
+                          ref={imageEl}
+                          style={{ display: "none" }}
+                        />
+                        <img src={originalData.urls.regular} alt="" />
+                      </>
+                    }
                     itemTwo={
                       <canvas style={{ width: "100%" }} ref={canvas}></canvas>
                     }
                   />
                 </div>
+                <p>
+                  Photo by{" "}
+                  <a
+                    href={`https://unsplash.com/@${originalData.user.username}?utm_source=pixelSlash&utm_medium=referral`}
+                  >
+                    {originalData.user.name}
+                  </a>{" "}
+                  on{" "}
+                  <a href="https://unsplash.com/?utm_source=pixelSlash&utm_medium=referral">
+                    Unsplash
+                  </a>
+                </p>
                 <button
                   className="nes-btn "
                   onClick={() => download(canvas.current)}
