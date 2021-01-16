@@ -104,3 +104,10 @@ header h1 {
   transform: rotate(-90deg) !important;
   margin-top: 24px;
 }
+
+#error-dialog {
+  position: fixed;
+  bottom: 0;
+  max-width: 300px;
+  right: 0;
+}

@@ -23,4 +23,5 @@ export const state = {
   scale: 8,
   grayscale: false,
   palette: null,
+  error: null,
 };

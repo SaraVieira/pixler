@@ -34,6 +34,13 @@ export default function IndexPage() {
                 Download
               </button>
             )}
+            {state.error && (
+              <div className="nes-balloon from-left" id="error-dialog">
+                <p className="nes-text is-error">
+                  There has been a problem creating your image
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -57,7 +57,6 @@ function base64Decode(data) {
 }
 
 function getPngDimensions(dataUri) {
-  console.log("dataUri", dataUri);
   if (dataUri.substring(0, 22) !== "data:image/png;base64,") {
     throw new Error("Unsupported data URI format");
   }

@@ -32,11 +32,14 @@ const Form = ({ imageEl, canvas }) => {
       <div className="nes-field mb-3">
         <label htmlFor="size_field">Pixel Size</label>
         <input
-          type="text"
+          type="number"
           id="size_field"
           className="nes-input"
           value={state.scale}
-          onChange={(e) => state.setScale(e.target.value)}
+          onChange={(e) => {
+            actions.setScale(e.target.value);
+            if (state.activeImage) actions.pixelImage({ canvas, imageEl });
+          }}
         />
       </div>
       <label className="mb-3">
@@ -44,7 +47,10 @@ const Form = ({ imageEl, canvas }) => {
           type="checkbox"
           className="nes-checkbox"
           checked={state.grayscale}
-          onChange={() => actions.toggleGrayscale()}
+          onChange={() => {
+            actions.toggleGrayscale();
+            if (state.activeImage) actions.pixelImage({ canvas, imageEl });
+          }}
         />
         <span>Grayscale</span>
       </label>
@@ -52,7 +58,10 @@ const Form = ({ imageEl, canvas }) => {
       <div className="mb-6">
         <Palettes
           activePalette={state.palette}
-          onChange={(value) => actions.setPalette(value)}
+          onChange={(value) => {
+            actions.setPalette(value);
+            if (state.activeImage) actions.pixelImage({ canvas, imageEl });
+          }}
         />
       </div>
       <button
