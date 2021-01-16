@@ -20,6 +20,8 @@
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.2.1",
+    "eslint": "^7.18.0",
+    "eslint-plugin-react": "^7.22.0",
     "next-on-netlify": "^2.7.2",
     "postcss-flexbugs-fixes": "5.0.2",
     "postcss-preset-env": "^6.7.0",
