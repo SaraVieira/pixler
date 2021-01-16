@@ -1,7 +1,11 @@
 import "../styles/index.css";
 import Head from "next/head";
+import { createOvermind } from "overmind";
+import { config } from "../overmind";
+import { Provider } from "overmind-react";
 
 function MyApp({ Component, pageProps }) {
+  const overmind = createOvermind(config);
   return (
     <>
       <Head>
@@ -27,7 +31,9 @@ function MyApp({ Component, pageProps }) {
         <meta name="theme-color" content="#ffffff" />
         <title>Pixel Splash</title>
       </Head>
-      <Component {...pageProps} />
+      <Provider value={overmind}>
+        <Component {...pageProps} />
+      </Provider>
     </>
   );
 }

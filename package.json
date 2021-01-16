@@ -12,6 +12,8 @@
     "next": "latest",
     "nice-color-palettes": "^3.0.0",
     "node-fetch": "^2.6.1",
+    "overmind": "^26.0.0",
+    "overmind-react": "^27.0.0",
     "postcss": "^8.2.4",
     "react": "^17.0.1",
     "react-compare-slider": "^2.0.2",
