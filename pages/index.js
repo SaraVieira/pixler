@@ -25,6 +25,7 @@ export default function IndexPage() {
           </div>
           <div className=" py-5">
             <ImageViewer imageEl={imageEl} canvas={canvas} />
+
             {state.activeImage && (
               <button
                 className="nes-btn "

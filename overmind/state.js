@@ -6,7 +6,16 @@ export const state = {
   activeTab: tabs[0],
   isUnsplash: derived((state) => state.activeTab === tabs[0]),
   isFileUpload: derived((state) => state.activeTab === tabs[1]),
-  isURl: derived((state) => state.activeTab === tabs[2]),
+  isURL: derived((state) => state.activeTab === tabs[2]),
+  isButtonDisabled: derived((state) => {
+    if (state.isUnsplash || state.isURL) {
+      return !state.imageLink;
+    }
+
+    if (state.isFileUpload) {
+      return !state.uploadedFile;
+    }
+  }),
   imageLink: "1U0xyCNniTs",
   uploadedFile: null,
   activeImage: null,

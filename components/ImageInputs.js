@@ -21,10 +21,10 @@ const ImageInputs = () => {
       {state.isFileUpload ? (
         <label className="nes-btn">
           <span>Select your file</span>
-          <input accept="image/*" type="file" onChange={actions.fileUpload} />
+          <input accept="image/png" type="file" onChange={actions.fileUpload} />
         </label>
       ) : null}
-      {state.isFileUpload ? (
+      {state.isURL ? (
         <>
           <label htmlFor="url_field">Image Link</label>
           <input

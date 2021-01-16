@@ -6,7 +6,12 @@ const Form = ({ imageEl, canvas }) => {
   const { state, actions } = useOvermind();
 
   return (
-    <form onSubmit={(e) => actions.getAndPixelateImage({ e, imageEl, canvas })}>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        actions.getAndPixelateImage({ imageEl, canvas });
+      }}
+    >
       <div className="nes-field mb-3">
         <nav className="mb-3">
           {state.tabs.map((tab) => (
@@ -31,10 +36,7 @@ const Form = ({ imageEl, canvas }) => {
           id="size_field"
           className="nes-input"
           value={state.scale}
-          onChange={(e) => {
-            state.setScale(e.target.value);
-            if (state.activeImage) actions.pixelImage({ canvas, imageEl });
-          }}
+          onChange={(e) => state.setScale(e.target.value)}
         />
       </div>
       <label className="mb-3">
@@ -42,10 +44,7 @@ const Form = ({ imageEl, canvas }) => {
           type="checkbox"
           className="nes-checkbox"
           checked={state.grayscale}
-          onChange={() => {
-            actions.toggleGrayscale();
-            if (state.activeImage) actions.pixelImage({ canvas, imageEl });
-          }}
+          onChange={() => actions.toggleGrayscale()}
         />
         <span>Grayscale</span>
       </label>
@@ -53,18 +52,15 @@ const Form = ({ imageEl, canvas }) => {
       <div className="mb-6">
         <Palettes
           activePalette={state.palette}
-          onChange={(value) => {
-            actions.setPalette(value);
-            if (state.activeImage) actions.pixelImage({ canvas, imageEl });
-          }}
+          onChange={(value) => actions.setPalette(value)}
         />
       </div>
       <button
         type="submit"
         className={`nes-btn ${
-          actions.isButtonDisabled() ? "is-disabled" : "is-primary"
+          state.isButtonDisabled ? "is-disabled" : "is-primary"
         }`}
-        disabled={actions.isButtonDisabled()}
+        disabled={state.isButtonDisabled}
       >
         Pixel It
       </button>

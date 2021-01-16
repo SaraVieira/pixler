@@ -9,7 +9,7 @@ export const setLink = ({ state }, link) => {
 };
 
 export const setPalette = ({ state }, palette) => {
-  state.imagePalette = palette.map((c) => Color(c).rgb().array());
+  state.palette = palette.map((c) => Color(c).rgb().array());
 };
 
 export const toggleGrayscale = ({ state }) => {
@@ -27,22 +27,10 @@ export const fileUpload = async ({ state, effects }, e) => {
   state.uploadedFile = base64;
 };
 
-export const isButtonDisabled = ({ state }) => {
-  if (state.isUnsplash || state.isURl) {
-    return !state.imageLink;
-  }
-
-  if (state.isFileUpload) {
-    return !state.uploadedFile;
-  }
-};
-
 export const getAndPixelateImage = async (
   { state, effects, actions },
-  { e, imageEl, canvas }
+  { imageEl, canvas }
 ) => {
-  e.preventDefault();
-  state.image = null;
   if (state.isUnsplash) {
     const id = state.imageLink.includes("unsplash.com/photos/")
       ? state.imageLink.split("unsplash.com/photos/")[1]
@@ -51,29 +39,40 @@ export const getAndPixelateImage = async (
     const data = await fetch(`api/photo/${id}`).then((rsp) => rsp.json());
     const dataUrl = await effects.browser.toDataURL(data.urls.regular);
     state.unsplashData = data;
-    state.image = dataUrl;
+    state.activeImage = dataUrl;
   }
 
-  if (state.isUrl) {
+  if (state.isURL) {
     const dataUrl = await effects.browser.toDataURL(state.imageLink);
-    state.image = dataUrl;
+    state.activeImage = dataUrl;
   }
 
   if (state.isFileUpload) {
-    state.image = state.fileUploaded;
+    state.activeImage = state.uploadedFile;
   }
+
   actions.pixelImage({ canvas, imageEl });
 };
 
 export const pixelImage = async (
-  { state: { scale, palette, grayscale }, effects },
+  { state: { scale, palette, grayscale, activeImage }, effects },
   { canvas, imageEl }
 ) => {
-  effects.pixel.drawPixelImage({
+  // I NEED TO FIGURE OUT WHY I NEED TO CALL THIS TWICE
+  await effects.pixel.drawPixelImage({
     to: canvas.current,
     from: imageEl.current,
     scale,
     palette,
     grayscale,
+    activeImage,
+  });
+  await effects.pixel.drawPixelImage({
+    to: canvas.current,
+    from: imageEl.current,
+    scale,
+    palette,
+    grayscale,
+    activeImage,
   });
 };
