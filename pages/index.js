@@ -9,6 +9,16 @@ import Color from "color";
 
 import Palettes from "../components/Palettes";
 
+const toBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+
+const tabs = ["Unsplash Link", "File Upload", "Url"];
+
 export default function IndexPage() {
   const [link, setLink] = useState("1U0xyCNniTs");
   const [image, setImage] = useState(null);
@@ -16,6 +26,8 @@ export default function IndexPage() {
   const [grayscale, setGrayscale] = useState(null);
   const [originalData, setOriginalData] = useState(null);
   const [palette, setPalette] = useState(null);
+  const [method, setMethod] = useState(tabs[0]);
+  const [fileUploaded, setFileUploaded] = useState(null);
 
   const canvas = useRef();
   const imageEl = useRef();
@@ -31,18 +43,37 @@ export default function IndexPage() {
   };
 
   const getAndPixelateImage = async (e) => {
-    setImage(null);
     e.preventDefault();
-    const id = link.includes("unsplash.com/photos/")
-      ? link.split("unsplash.com/photos/")
-      : link;
+    setImage(null);
+    if (method === tabs[0]) {
+      const id = link.includes("unsplash.com/photos/")
+        ? link.split("unsplash.com/photos/")[1]
+        : link;
 
-    const data = await fetch(`api/photo/${id}`).then((rsp) => rsp.json());
-    console.log(data);
-    const dataUrl = await toDataURL(data.urls.regular);
-    setOriginalData(data);
-    setImage(dataUrl);
+      const data = await fetch(`api/photo/${id}`).then((rsp) => rsp.json());
+      const dataUrl = await toDataURL(data.urls.regular);
+      setOriginalData(data);
+      setImage(dataUrl);
+    }
+
+    if (method === tabs[2]) {
+      const dataUrl = await toDataURL(link);
+      setImage(dataUrl);
+    }
+
+    if (method === tabs[1]) {
+      console.log(fileUploaded);
+      setImage(fileUploaded);
+    }
+
     pixel();
+  };
+
+  const fileUpload = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await toBase64(file);
+    console.log(base64);
+    setFileUploaded(base64);
   };
 
   return (
@@ -58,15 +89,52 @@ export default function IndexPage() {
           <div className={`py-5 ${image ? "divider" : null}`}>
             <form onSubmit={getAndPixelateImage}>
               <div className="nes-field mb-3">
-                <label htmlFor="url_field">Link or Unsplash Image ID</label>
-                <input
-                  type="text"
-                  id="url_field"
-                  className="nes-input"
-                  placeholder="Place an unsplash link or id"
-                  onChange={(e) => setLink(e.target.value)}
-                  value={link}
-                />
+                <nav className="mb-3">
+                  {tabs.map((tab) => (
+                    <button
+                      key={tab}
+                      type="button"
+                      onClick={() => setMethod(tab)}
+                      className={`nes-btn ${
+                        method === tab ? "is-primary" : null
+                      }`}
+                    >
+                      {tab}
+                    </button>
+                  ))}
+                </nav>
+                {method === tabs[0] ? (
+                  <>
+                    <label htmlFor="url_field">Link or Unsplash Image ID</label>
+                    <input
+                      type="text"
+                      id="url_field"
+                      className="nes-input"
+                      placeholder="Place an unsplash link or id"
+                      onChange={(e) => setLink(e.target.value)}
+                      value={link}
+                    />
+                  </>
+                ) : null}
+                {method === tabs[1] ? (
+                  <label className="nes-btn">
+                    <span>Select your file</span>
+                    <input accept="image/*" type="file" onChange={fileUpload} />
+                  </label>
+                ) : null}
+                {method === tabs[2] ? (
+                  <>
+                    <label htmlFor="url_field">Image Link</label>
+                    <input
+                      type="text"
+                      id="url_field"
+                      className="nes-input"
+                      placeholder="Place an image link"
+                      onChange={(e) => setLink(e.target.value)}
+                      value={link}
+                    />
+                  </>
+                ) : null}
               </div>
               <div className="nes-field mb-3">
                 <label htmlFor="size_field">Pixel Size</label>
@@ -136,7 +204,14 @@ export default function IndexPage() {
                           ref={imageEl}
                           style={{ display: "none" }}
                         />
-                        <img src={originalData.urls.regular} alt="" />
+                        <img
+                          src={
+                            method === tabs[0]
+                              ? originalData.urls.regular
+                              : image
+                          }
+                          alt=""
+                        />
                       </>
                     }
                     itemTwo={
@@ -144,18 +219,20 @@ export default function IndexPage() {
                     }
                   />
                 </div>
-                <p>
-                  Photo by{" "}
-                  <a
-                    href={`https://unsplash.com/@${originalData.user.username}?utm_source=pixelSlash&utm_medium=referral`}
-                  >
-                    {originalData.user.name}
-                  </a>{" "}
-                  on{" "}
-                  <a href="https://unsplash.com/?utm_source=pixelSlash&utm_medium=referral">
-                    Unsplash
-                  </a>
-                </p>
+                {method === tabs[0] ? (
+                  <p>
+                    Photo by{" "}
+                    <a
+                      href={`https://unsplash.com/@${originalData.user.username}?utm_source=pixelSlash&utm_medium=referral`}
+                    >
+                      {originalData.user.name}
+                    </a>{" "}
+                    on{" "}
+                    <a href="https://unsplash.com/?utm_source=pixelSlash&utm_medium=referral">
+                      Unsplash
+                    </a>
+                  </p>
+                ) : null}
                 <button
                   className="nes-btn "
                   onClick={() => download(canvas.current)}
