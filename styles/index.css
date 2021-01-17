@@ -112,6 +112,109 @@ header h1 {
   right: 0;
 }
 
+.nes-range {
+  width: 100%;
+  background: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Chrome */
+  /* ========= */
+  /* Firefox */
+  /* ========= */
+  /* IE */
+  /* ========= */
+}
+
+.nes-range::-webkit-slider-thumb {
+  width: 4px;
+  height: 4px;
+  cursor: url(https://unpkg.com/nes.css/assets/cursor-click.png), pointer;
+  background: #fff;
+  border: 10px solid #000;
+  border-radius: 10px;
+  -webkit-appearance: none;
+  transform: translateY(-30%);
+}
+
+.nes-range::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: url(https://unpkg.com/nes.css/assets/cursor-click.png), pointer;
+  background: #209cee;
+  border: 0.2px solid #010101;
+  border-radius: 1.3px;
+  box-shadow: 1px 1px 1px #000, 0 0 1px #0d0d0d;
+}
+
+.nes-range.is-green::-webkit-slider-runnable-track {
+  background: #92cc41;
+}
+
+.nes-range.is-yellow::-webkit-slider-runnable-track {
+  background: #f7d51d;
+}
+
+.nes-range.is-red::-webkit-slider-runnable-track {
+  background: #e76e55;
+}
+
+.nes-range::-moz-range-thumb {
+  width: 4px;
+  height: 4px;
+  cursor: url(https://unpkg.com/nes.css/assets/cursor-click.png), pointer;
+  background: #fff;
+  border: 10px solid #000;
+  border-radius: 10px;
+  -webkit-appearance: none;
+}
+
+.nes-range::-moz-range-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: url(https://unpkg.com/nes.css/assets/cursor-click.png), pointer;
+  background: #209cee;
+  border: 0.2px solid #010101;
+  border-radius: 1.3px;
+  box-shadow: 1px 1px 1px #000, 0 0 1px #0d0d0d;
+}
+
+.nes-range.is-green::-moz-range-track {
+  background: #92cc41;
+}
+
+.nes-range.is-yellow::-moz-range-track {
+  background: #f7d51d;
+}
+
+.nes-range.is-red::-moz-range-track {
+  background: #e76e55;
+}
+
+.nes-range::-ms-thumb {
+  width: 4px;
+  height: 4px;
+  cursor: url(https://unpkg.com/nes.css/assets/cursor-click.png), pointer;
+  background: #fff;
+  border: 10px solid #000;
+  border-radius: 10px;
+  -webkit-appearance: none;
+}
+
+.nes-range::-ms-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: url(https://unpkg.com/nes.css/assets/cursor-click.png), pointer;
+  background: #209cee;
+  border: 0.2px solid #010101;
+  border-radius: 1.3px;
+  box-shadow: 1px 1px 1px #000, 0 0 1px #0d0d0d;
+}
+
+.nes-range:focus {
+  outline: none;
+}
+
 @media screen and (max-width: 768px) {
   header {
     flex-direction: column;
@@ -126,4 +229,29 @@ header h1 {
   .nes-btn input[type="file"] {
     display: none;
   }
+}
+
+.advanced-button {
+  position: relative;
+  transition: transform 200ms ease;
+}
+.advanced-button:after {
+  width: 3px;
+  height: 3px;
+  color: #212529;
+  box-shadow: 3px 3px, 6px 3px, 9px 3px, 12px 3px, 15px 3px, 18px 3px, 21px 3px,
+    3px 6px, 6px 6px, 9px 6px, 12px 6px, 15px 6px, 18px 6px, 21px 6px, 6px 9px,
+    9px 9px, 12px 9px, 15px 9px, 18px 9px, 6px 12px, 9px 12px, 12px 12px,
+    15px 12px, 18px 12px, 9px 15px, 12px 15px, 15px 15px, 12px 18px;
+  position: absolute;
+  top: calc(50% - 11px);
+  right: -4px;
+  pointer-events: none;
+  content: "";
+  transition: transform 200ms ease;
+}
+
+.advanced-button.open:after {
+  transform: rotateX(-180deg);
+  top: calc(50% + 11px);
 }

@@ -6,8 +6,16 @@ export const setLink = ({ state }, link) => {
   state.imageLink = link;
 };
 
+export const setValue = ({ state }, { name, value }) => {
+  state[name] = value;
+};
+
 export const toggleGrayscale = ({ state }) => {
   state.grayscale = !state.grayscale;
+};
+
+export const toggleInvert = ({ state }) => {
+  state.invert = !state.invert;
 };
 
 export const toggleSepia = ({ state }) => {
@@ -67,7 +75,20 @@ export const getAndPixelateImage = async (
 };
 
 export const pixelImage = async ({ state, effects }, { canvas }) => {
-  const { scale, palette, grayscale, activeImage, sepia } = state;
+  const {
+    scale,
+    palette,
+    grayscale,
+    activeImage,
+    sepia,
+    hue,
+    exposure,
+    gamma,
+    noise,
+    saturation,
+    vibrance,
+    invert,
+  } = state;
   try {
     await effects.pixel.drawPixelImage({
       to: canvas.current,
@@ -76,6 +97,13 @@ export const pixelImage = async ({ state, effects }, { canvas }) => {
       grayscale,
       activeImage,
       sepia,
+      hue,
+      exposure,
+      gamma,
+      noise,
+      saturation,
+      vibrance,
+      invert,
     });
   } catch (e) {
     console.error(e);

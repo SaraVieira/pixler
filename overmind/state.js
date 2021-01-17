@@ -16,7 +16,7 @@ export const state = {
       return !state.uploadedFile;
     }
   }),
-  imageLink: "",
+  imageLink: "0StwxZ4NigE",
   uploadedFile: null,
   activeImage: null,
   unsplashData: null,
@@ -24,4 +24,11 @@ export const state = {
   grayscale: false,
   sepia: false,
   error: null,
+  hue: 0,
+  exposure: 0,
+  gamma: 0,
+  noise: 0,
+  saturation: 0,
+  vibrance: 0,
+  invert: false,
 };

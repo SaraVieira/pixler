@@ -95,6 +95,13 @@ export const pixel = {
     grayscale,
     sepia,
     activeImage,
+    hue,
+    gamma,
+    exposure,
+    noise,
+    saturation,
+    vibrance,
+    invert,
   }) {
     const img = await this.createImage(activeImage);
     const scale = originalScale ? originalScale * 0.01 : 8 * 0.01;
@@ -115,16 +122,41 @@ export const pixel = {
     ctx.drawImage(img, 0, 0, scaledW, scaledH);
     ctx.drawImage(drawTo, 0, 0, scaledW, scaledH, 0, 0, img.width, img.height);
 
-    if (grayscale) {
-      Caman(drawTo, function () {
+    Caman(drawTo, function () {
+      if (grayscale) {
         this.greyscale().render();
-      });
-    }
+      }
 
-    if (sepia) {
-      Caman(drawTo, function () {
+      if (sepia) {
         this.sepia(100).render();
-      });
-    }
+      }
+
+      if (hue) {
+        this.hue(parseInt(hue)).render();
+      }
+
+      if (exposure) {
+        this.exposure(parseInt(exposure)).render();
+      }
+
+      if (gamma) {
+        this.gamma(parseInt(gamma)).render();
+      }
+
+      if (noise) {
+        this.noise(parseInt(noise)).render();
+      }
+      if (saturation) {
+        this.saturation(parseInt(saturation)).render();
+      }
+
+      if (vibrance) {
+        this.vibrance(parseInt(vibrance)).render();
+      }
+
+      if (invert) {
+        this.invert().render();
+      }
+    });
   },
 };
