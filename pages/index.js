@@ -12,7 +12,7 @@ export default function IndexPage() {
   return (
     <div className="bg-gray-100">
       <header>
-        <img src="/logo.svg" />
+        <img src="/logo.svg" alt="Pixel Splash Logo" />
         <h1 className="nes-text is-primary">
           Pixel <span style={{ color: "#92cc41" }}>Splash</span>
         </h1>

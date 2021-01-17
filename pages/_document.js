@@ -10,6 +10,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <html lang="en-us" />
           <meta charset="utf-8" />
           <title>Pixel Splash</title>
 
