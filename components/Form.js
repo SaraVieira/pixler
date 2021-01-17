@@ -1,6 +1,6 @@
 import { useOvermind } from "../overmind";
 import ImageInputs from "./ImageInputs";
-import Palettes from "./Palettes";
+// import Palettes from "./Palettes";
 
 const Form = ({ imageEl, canvas }) => {
   const { state, actions } = useOvermind();
@@ -54,16 +54,10 @@ const Form = ({ imageEl, canvas }) => {
         />
         <span>Grayscale</span>
       </label>
-
+      {/* 
       <div className="mb-6">
-        <Palettes
-          activePalette={state.palette}
-          onChange={(value) => {
-            actions.setPalette(value);
-            if (state.activeImage) actions.pixelImage({ canvas, imageEl });
-          }}
-        />
-      </div>
+        <Palettes />
+      </div> */}
       <button
         type="submit"
         className={`nes-btn ${

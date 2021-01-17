@@ -1,8 +1,11 @@
 import { useState } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
+import Color from "color";
 import palettes from "nice-color-palettes";
+import { useOvermind } from "../overmind";
 
-const Palettes = ({ onChange, activePalette }) => {
+const Palettes = () => {
+  const { state, actions } = useOvermind();
   const [showDropdown, setShowDropdown] = useState(false);
   return (
     <OutsideClickHandler
@@ -21,13 +24,13 @@ const Palettes = ({ onChange, activePalette }) => {
         >
           <span className="flex items-center">
             <span className="ml-3 flex" style={{ width: "calc(100% - 60px)" }}>
-              {!activePalette
+              {!state.palette
                 ? "Use a color palette"
-                : activePalette.map((c, id) => (
+                : state.palette.map((c, id) => (
                     <div
                       key={id}
                       style={{
-                        backgroundColor: c,
+                        backgroundColor: Color(c).rgb().string(),
                         flexGrow: 1,
                         height: 20,
                       }}
@@ -54,7 +57,7 @@ const Palettes = ({ onChange, activePalette }) => {
               role="option"
               className="text-gray-900 cursor-default select-none relative py-2"
               onClick={() => {
-                onChange(null);
+                actions.setPalette(null);
                 setShowDropdown(false);
               }}
             >
@@ -67,7 +70,9 @@ const Palettes = ({ onChange, activePalette }) => {
                 role="option"
                 className="cursor-default select-none relative py-2"
                 onClick={() => {
-                  onChange(p);
+                  actions.setPalette(p);
+                  console.log(p);
+                  // if (state.activeImage) actions.pixelImage({ canvas, imageEl });
                   setShowDropdown(false);
                 }}
               >

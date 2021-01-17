@@ -66,10 +66,8 @@ export const getAndPixelateImage = async (
   }
 };
 
-export const pixelImage = async (
-  { state: { scale, palette, grayscale, activeImage, error }, effects },
-  { canvas, imageEl }
-) => {
+export const pixelImage = async ({ state, effects }, { canvas, imageEl }) => {
+  const { scale, palette, grayscale, activeImage } = state;
   try {
     // I NEED TO FIGURE OUT WHY I NEED TO CALL THIS TWICE
     await effects.pixel.drawPixelImage({
@@ -89,6 +87,6 @@ export const pixelImage = async (
       activeImage,
     });
   } catch {
-    error = true;
+    state.error = true;
   }
 };

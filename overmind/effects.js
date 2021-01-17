@@ -76,7 +76,7 @@ export const browser = {
   },
   download(canvas, name = "pixelated-image") {
     const link = document.createElement("a");
-    link.download = name;
+    link.download = name + ".png";
     link.href = canvas
       .toDataURL("image/png")
       .replace("image/png", "image/octet-stream");
@@ -139,25 +139,6 @@ export const pixel = {
         imgPixels.data[i] = avg;
         imgPixels.data[i + 1] = avg;
         imgPixels.data[i + 2] = avg;
-      }
-    }
-    ctx.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
-  },
-  convertPalette(ctx, drawTo, palette) {
-    const w = drawTo.width;
-    const h = drawTo.height;
-    var imgPixels = ctx.getImageData(0, 0, w, h);
-    for (var y = 0; y < imgPixels.height; y++) {
-      for (var x = 0; x < imgPixels.width; x++) {
-        var i = y * 4 * imgPixels.width + x * 4;
-        //var avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / 3;
-        const finalcolor = this.similarColor(
-          [imgPixels.data[i], imgPixels.data[i + 1], imgPixels.data[i + 2]],
-          palette
-        );
-        imgPixels.data[i] = finalcolor[0];
-        imgPixels.data[i + 1] = finalcolor[1];
-        imgPixels.data[i + 2] = finalcolor[2];
       }
     }
     ctx.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
@@ -245,7 +226,31 @@ export const pixel = {
       this.convertGrayscale(ctx, drawTo);
     }
     if (palette && palette.length) {
-      this.convertPalette(ctx, drawTo, palette);
+      const w = drawTo.width;
+      const h = drawTo.height;
+      var imgPixels = ctx.getImageData(0, 0, w, h);
+      for (var y = 0; y < imgPixels.height; y++) {
+        for (var x = 0; x < imgPixels.width; x++) {
+          var i = y * 4 * imgPixels.width + x * 4;
+          //var avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / 3;
+          const finalcolor = this.similarColor(
+            [imgPixels.data[i], imgPixels.data[i + 1], imgPixels.data[i + 2]],
+            palette
+          );
+          imgPixels.data[i] = finalcolor[0];
+          imgPixels.data[i + 1] = finalcolor[1];
+          imgPixels.data[i + 2] = finalcolor[2];
+        }
+      }
+      ctx.putImageData(
+        imgPixels,
+        0,
+        0,
+        0,
+        0,
+        imgPixels.width,
+        imgPixels.height
+      );
     }
   },
 };
