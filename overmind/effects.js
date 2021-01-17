@@ -105,27 +105,6 @@ export const browser = {
 };
 
 export const pixel = {
-  colorSim(rgbColor, compareColor) {
-    let i;
-    let max;
-    let d = 0;
-    for (i = 0, max = rgbColor.length; i < max; i++) {
-      d += (rgbColor[i] - compareColor[i]) * (rgbColor[i] - compareColor[i]);
-    }
-    return Math.sqrt(d);
-  },
-
-  similarColor(actualColor, palette) {
-    let selectedColor = [];
-    let currentSim = this.colorSim(actualColor, palette[0]);
-    palette.forEach((color) => {
-      if (this.colorSim(actualColor, color) <= currentSim) {
-        selectedColor = color;
-        currentSim = this.colorSim(actualColor, color);
-      }
-    });
-    return selectedColor;
-  },
   convertGrayscale(ctx, drawTo) {
     const w = drawTo.width;
     const h = drawTo.height;
@@ -143,28 +122,21 @@ export const pixel = {
     }
     ctx.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
   },
-
-  draw(drawFrom, drawTo, ctx, maxWidth, maxHeight) {
-    //draw image to canvas
+  createImage(activeImage) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = activeImage;
+    });
+  },
+  async draw(drawFrom, drawTo, ctx, img) {
     drawTo.width = drawFrom.width;
     drawTo.height = drawFrom.height;
-    ctx.drawImage(drawFrom, 0, 0);
+    ctx.drawImage(img, 0, 0);
     const canvasCopy = document.createElement("canvas");
     const copyContext = canvasCopy.getContext("2d");
     let ratio = 1.0;
-
-    //if none defined skip
-    if (!maxWidth && !maxHeight) {
-      return 0;
-    }
-
-    if (maxWidth && drawTo.width > maxWidth) {
-      ratio = maxWidth / drawTo.width;
-    }
-    //max height overrides max width
-    if (maxHeight && drawTo.height > maxHeight) {
-      ratio = maxHeight / drawTo.height;
-    }
 
     canvasCopy.width = drawTo.width;
     canvasCopy.height = drawTo.height;
@@ -184,24 +156,21 @@ export const pixel = {
       drawTo.height
     );
   },
-  async drawPixelImage(config) {
-    //target for canvas
-    const drawTo = config.to;
-    //origin of uploaded image/src img
-    const drawFrom = config.from;
-    const scale = config.scale ? config.scale * 0.01 : 8 * 0.01;
-    const palette = config.palette;
-    const maxHeight = config.maxHeight;
-    const maxWidth = config.maxWidth;
-    const grayscale = config.grayscale;
-    drawFrom.width = getPngDimensions(config.activeImage).width;
-    drawFrom.height = getPngDimensions(config.activeImage).height;
+  async drawPixelImage({
+    to: drawTo,
+    from: drawFrom,
+    scale: originalScale,
+    grayscale,
+    activeImage,
+  }) {
+    const img = await this.createImage(activeImage);
+    const scale = originalScale ? originalScale * 0.01 : 8 * 0.01;
     const ctx = drawTo.getContext("2d");
 
-    this.draw(drawFrom, drawTo, ctx, maxWidth, maxHeight);
+    await this.draw(img, drawTo, ctx, img);
 
-    drawTo.width = drawFrom.width;
-    drawTo.height = drawFrom.height;
+    drawTo.width = img.width;
+    drawTo.height = img.height;
 
     const scaledW = drawTo.width * scale;
     const scaledH = drawTo.height * scale;
@@ -210,47 +179,10 @@ export const pixel = {
     ctx.webkitImageSmoothingEnabled = false;
     ctx.imageSmoothingEnabled = false;
 
-    ctx.drawImage(drawFrom, 0, 0, scaledW, scaledH);
-    ctx.drawImage(
-      drawTo,
-      0,
-      0,
-      scaledW,
-      scaledH,
-      0,
-      0,
-      drawFrom.width,
-      drawFrom.height
-    );
+    ctx.drawImage(img, 0, 0, scaledW, scaledH);
+    ctx.drawImage(drawTo, 0, 0, scaledW, scaledH, 0, 0, img.width, img.height);
     if (grayscale) {
       this.convertGrayscale(ctx, drawTo);
-    }
-    if (palette && palette.length) {
-      const w = drawTo.width;
-      const h = drawTo.height;
-      var imgPixels = ctx.getImageData(0, 0, w, h);
-      for (var y = 0; y < imgPixels.height; y++) {
-        for (var x = 0; x < imgPixels.width; x++) {
-          var i = y * 4 * imgPixels.width + x * 4;
-          //var avg = (imgPixels.data[i] + imgPixels.data[i + 1] + imgPixels.data[i + 2]) / 3;
-          const finalcolor = this.similarColor(
-            [imgPixels.data[i], imgPixels.data[i + 1], imgPixels.data[i + 2]],
-            palette
-          );
-          imgPixels.data[i] = finalcolor[0];
-          imgPixels.data[i + 1] = finalcolor[1];
-          imgPixels.data[i + 2] = finalcolor[2];
-        }
-      }
-      ctx.putImageData(
-        imgPixels,
-        0,
-        0,
-        0,
-        0,
-        imgPixels.width,
-        imgPixels.height
-      );
     }
   },
 };

@@ -1,15 +1,9 @@
-import Color from "color";
-
 export const setTab = ({ state }, tab) => {
   state.activeTab = tab;
 };
 
 export const setLink = ({ state }, link) => {
   state.imageLink = link;
-};
-
-export const setPalette = ({ state }, palette) => {
-  state.palette = palette.map((c) => Color(c).rgb().array());
 };
 
 export const toggleGrayscale = ({ state }) => {
@@ -29,7 +23,8 @@ export const fileUpload = async ({ state, effects }, e) => {
     const file = e.target.files[0];
     const base64 = await effects.browser.toBase64(file);
     state.uploadedFile = base64;
-  } catch {
+  } catch (e) {
+    console.error(e);
     state.error = true;
   }
 };
@@ -61,7 +56,8 @@ export const getAndPixelateImage = async (
     }
 
     actions.pixelImage({ canvas, imageEl });
-  } catch {
+  } catch (e) {
+    console.error(e);
     state.error = true;
   }
 };
@@ -78,15 +74,8 @@ export const pixelImage = async ({ state, effects }, { canvas, imageEl }) => {
       grayscale,
       activeImage,
     });
-    await effects.pixel.drawPixelImage({
-      to: canvas.current,
-      from: imageEl.current,
-      scale,
-      palette,
-      grayscale,
-      activeImage,
-    });
-  } catch {
+  } catch (e) {
+    console.error(e);
     state.error = true;
   }
 };
