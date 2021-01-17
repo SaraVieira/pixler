@@ -4,7 +4,6 @@ module.exports = {
     purgeLayersByDefault: true,
   },
   purge: ["./components/**/*.{js,ts,jsx,tsx}", "./pages/**/*.{js,ts,jsx,tsx}"],
-  plugins: [require("@tailwindcss/forms")],
   theme: {
     extend: {
       colors: {
@@ -13,5 +12,4 @@ module.exports = {
     },
   },
   variants: {},
-  plugins: [],
 };

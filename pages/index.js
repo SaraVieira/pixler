@@ -43,6 +43,11 @@ export default function IndexPage() {
           </div>
         </div>
       </div>
+      <footer className="flex items-center justify-center mb-6">
+        <a href="https://github.com/SaraVieira/pixel-splash">
+          <i className="nes-octocat is-medium"></i>
+        </a>
+      </footer>
     </div>
   );
 }
