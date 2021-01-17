@@ -229,6 +229,13 @@ header h1 {
   .nes-btn input[type="file"] {
     display: none;
   }
+  .advanced-button {
+    font-size: 14px;
+  }
+
+  .advanced-button + section {
+    display: block;
+  }
 }
 
 .advanced-button {
