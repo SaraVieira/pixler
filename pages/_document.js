@@ -14,11 +14,14 @@ class MyDocument extends Document {
           <meta charset="utf-8" />
           <title>Pixel Splash</title>
 
-          <meta name="description" content="Convert any image into art" />
+          <meta name="description" content="Convert any image into pixel art" />
           <meta name="image" content="https://pixelsplash.art/twitter.png" />
 
           <meta itemProp="name" content="Pixel Splash" />
-          <meta itemProp="description" content="Convert any image into art" />
+          <meta
+            itemProp="description"
+            content="Convert any image into pixel art"
+          />
           <meta
             itemProp="image"
             content="https://pixelsplash.art/twitter.png"
@@ -28,7 +31,7 @@ class MyDocument extends Document {
           <meta name="twitter:title" content="Pixel Splash" />
           <meta
             name="twitter:description"
-            content="Convert any image into art"
+            content="Convert any image into pixel art"
           />
           <meta name="twitter:creator" content="@NikkitaFTW" />
           <meta
@@ -36,7 +39,10 @@ class MyDocument extends Document {
             content="https://pixelsplash.art/twitter.png"
           />
           <meta name="og:title" content="Pixel Splash" />
-          <meta name="og:description" content="Convert any image into art" />
+          <meta
+            name="og:description"
+            content="Convert any image into pixel art"
+          />
           <meta name="og:image" content="https://pixelsplash.art/twitter.png" />
           <meta name="og:url" content="https://pixelsplash.art/" />
           <meta name="og:site_name" content="Pixel Splash" />
