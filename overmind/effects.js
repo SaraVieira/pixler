@@ -93,6 +93,7 @@ export const pixel = {
     to: drawTo,
     scale: originalScale,
     grayscale,
+    sepia,
     activeImage,
   }) {
     const img = await this.createImage(activeImage);
@@ -113,8 +114,17 @@ export const pixel = {
 
     ctx.drawImage(img, 0, 0, scaledW, scaledH);
     ctx.drawImage(drawTo, 0, 0, scaledW, scaledH, 0, 0, img.width, img.height);
+
     if (grayscale) {
-      this.convertGrayscale(ctx, drawTo);
+      Caman(drawTo, function () {
+        this.greyscale().render();
+      });
+    }
+
+    if (sepia) {
+      Caman(drawTo, function () {
+        this.sepia(100).render();
+      });
     }
   },
 };

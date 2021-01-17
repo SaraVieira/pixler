@@ -10,6 +10,10 @@ export const toggleGrayscale = ({ state }) => {
   state.grayscale = !state.grayscale;
 };
 
+export const toggleSepia = ({ state }) => {
+  state.sepia = !state.sepia;
+};
+
 export const setScale = ({ state }, scale) => {
   state.scale = parseInt(scale, 10);
 };
@@ -63,7 +67,7 @@ export const getAndPixelateImage = async (
 };
 
 export const pixelImage = async ({ state, effects }, { canvas }) => {
-  const { scale, palette, grayscale, activeImage } = state;
+  const { scale, palette, grayscale, activeImage, sepia } = state;
   try {
     await effects.pixel.drawPixelImage({
       to: canvas.current,
@@ -71,6 +75,7 @@ export const pixelImage = async ({ state, effects }, { canvas }) => {
       palette,
       grayscale,
       activeImage,
+      sepia,
     });
   } catch (e) {
     console.error(e);

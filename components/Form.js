@@ -55,6 +55,20 @@ const Form = ({ canvas }) => {
           <span>Grayscale</span>
         </label>
       </div>
+      <div className="mb-6">
+        <label>
+          <input
+            type="checkbox"
+            className="nes-checkbox"
+            checked={state.sepia}
+            onChange={() => {
+              actions.toggleSepia();
+              if (state.activeImage) actions.pixelImage({ canvas });
+            }}
+          />
+          <span>Sepia</span>
+        </label>
+      </div>
       <button
         type="submit"
         className={`nes-btn ${

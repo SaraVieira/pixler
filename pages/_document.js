@@ -8,9 +8,8 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html lang="en-us">
         <Head>
-          <html lang="en-us" />
           <meta charset="utf-8" />
           <title>Pixel Splash</title>
 
@@ -86,6 +85,7 @@ class MyDocument extends Document {
             data-site="FWUMYUKE"
             defer
           ></script>
+          <script src="https://unpkg.com/caman@4.1.2/dist/caman.full.js" />
         </body>
       </Html>
     );

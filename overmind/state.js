@@ -22,5 +22,6 @@ export const state = {
   unsplashData: null,
   scale: 8,
   grayscale: false,
+  sepia: false,
   error: null,
 };
