@@ -42,18 +42,20 @@ const Form = ({ imageEl, canvas }) => {
           }}
         />
       </div>
-      <label className="mb-3">
-        <input
-          type="checkbox"
-          className="nes-checkbox"
-          checked={state.grayscale}
-          onChange={() => {
-            actions.toggleGrayscale();
-            if (state.activeImage) actions.pixelImage({ canvas, imageEl });
-          }}
-        />
-        <span>Grayscale</span>
-      </label>
+      <div className="mb-6">
+        <label>
+          <input
+            type="checkbox"
+            className="nes-checkbox"
+            checked={state.grayscale}
+            onChange={() => {
+              actions.toggleGrayscale();
+              if (state.activeImage) actions.pixelImage({ canvas, imageEl });
+            }}
+          />
+          <span>Grayscale</span>
+        </label>
+      </div>
       {/* 
       <div className="mb-6">
         <Palettes />
