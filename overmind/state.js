@@ -16,7 +16,7 @@ export const state = {
       return !state.uploadedFile;
     }
   }),
-  imageLink: "0StwxZ4NigE",
+  imageLink: "",
   uploadedFile: null,
   activeImage: null,
   unsplashData: null,
