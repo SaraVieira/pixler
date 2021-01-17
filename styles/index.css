@@ -111,3 +111,19 @@ header h1 {
   max-width: 300px;
   right: 0;
 }
+
+@media screen and (max-width: 768px) {
+  header {
+    flex-direction: column;
+    max-width: 80%;
+    margin: auto;
+    text-align: center;
+  }
+
+  .max-w-7xl {
+    max-width: 90%;
+  }
+  .nes-btn input[type="file"] {
+    display: none;
+  }
+}
