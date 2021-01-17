@@ -20,6 +20,10 @@ export const setScale = ({ state }, scale) => {
   state.scale = parseInt(scale, 10);
 };
 
+export const deleteUploadedFile = ({ state }) => {
+  state.uploadedFile = null;
+};
+
 export const fileUpload = async ({ state, effects }, e) => {
   try {
     const file = e.target.files[0];

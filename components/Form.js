@@ -19,7 +19,7 @@ const Form = ({ imageEl, canvas }) => {
               key={tab}
               type="button"
               onClick={() => actions.setTab(tab)}
-              className={`nes-btn ${
+              className={`nes-btn mr-2 ${
                 state.activeTab === tab ? "is-primary" : null
               }`}
             >

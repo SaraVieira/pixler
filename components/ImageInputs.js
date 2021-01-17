@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { useOvermind } from "../overmind";
 
 const ImageInputs = () => {
   const { state, actions } = useOvermind();
+  const [fileName, setFileName] = useState();
   return (
     <>
       {" "}
@@ -19,10 +21,34 @@ const ImageInputs = () => {
         </>
       ) : null}
       {state.isFileUpload ? (
-        <label className="nes-btn">
-          <span>Select your file</span>
-          <input accept="image/png" type="file" onChange={actions.fileUpload} />
-        </label>
+        <>
+          {fileName ? (
+            <div className="flex items-center justify-between">
+              <span className="nes-text is-success">{fileName}</span>
+              <button
+                className="nes-btn is-error"
+                onClick={() => {
+                  actions.deleteUploadedFile();
+                  setFileName(null);
+                }}
+              >
+                <i className="nes-icon close is-small"></i>
+              </button>
+            </div>
+          ) : (
+            <label className="nes-btn">
+              <span>Select your file</span>
+              <input
+                accept="image/png"
+                type="file"
+                onChange={(e) => {
+                  actions.fileUpload(e);
+                  setFileName(e.target.files[0].name);
+                }}
+              />
+            </label>
+          )}
+        </>
       ) : null}
       {state.isURL ? (
         <>

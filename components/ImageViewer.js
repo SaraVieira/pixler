@@ -36,9 +36,13 @@ const ImageViewer = ({ imageEl, canvas }) => {
                 style={{ display: "none" }}
               />
               {state.isUnsplash && state.unsplashData ? (
-                <img src={state.unsplashData.urls.regular} alt="" />
+                <img
+                  src={state.unsplashData.urls.regular}
+                  alt=""
+                  style={{ height: "100%" }}
+                />
               ) : (
-                <img src={state.activeImage} />
+                <img src={state.activeImage} style={{ height: "100%" }} />
               )}
             </>
           }
