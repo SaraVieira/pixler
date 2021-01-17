@@ -39,7 +39,7 @@ const ImageInputs = () => {
             <label className="nes-btn">
               <span>Select your file</span>
               <input
-                accept="image/png"
+                accept="image/*"
                 type="file"
                 onChange={(e) => {
                   actions.fileUpload(e);

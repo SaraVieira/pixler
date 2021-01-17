@@ -31,7 +31,7 @@ export const fileUpload = async ({ state, effects }, e) => {
 
 export const getAndPixelateImage = async (
   { state, effects, actions },
-  { imageEl, canvas }
+  { canvas }
 ) => {
   state.error = false;
   try {
@@ -55,20 +55,18 @@ export const getAndPixelateImage = async (
       state.activeImage = state.uploadedFile;
     }
 
-    actions.pixelImage({ canvas, imageEl });
+    actions.pixelImage({ canvas });
   } catch (e) {
     console.error(e);
     state.error = true;
   }
 };
 
-export const pixelImage = async ({ state, effects }, { canvas, imageEl }) => {
+export const pixelImage = async ({ state, effects }, { canvas }) => {
   const { scale, palette, grayscale, activeImage } = state;
   try {
-    // I NEED TO FIGURE OUT WHY I NEED TO CALL THIS TWICE
     await effects.pixel.drawPixelImage({
       to: canvas.current,
-      from: imageEl.current,
       scale,
       palette,
       grayscale,

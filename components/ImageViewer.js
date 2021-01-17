@@ -4,7 +4,7 @@ import {
 } from "react-compare-slider";
 import { useOvermind } from "../overmind";
 
-const ImageViewer = ({ imageEl, canvas }) => {
+const ImageViewer = ({ canvas }) => {
   const { state } = useOvermind();
 
   return (
@@ -30,11 +30,7 @@ const ImageViewer = ({ imageEl, canvas }) => {
           position={20}
           itemOne={
             <>
-              <img
-                src={state.activeImage}
-                ref={imageEl}
-                style={{ display: "none" }}
-              />
+              <img src={state.activeImage} style={{ display: "none" }} />
               {state.isUnsplash && state.unsplashData ? (
                 <img
                   src={state.unsplashData.urls.regular}

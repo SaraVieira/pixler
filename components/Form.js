@@ -1,14 +1,14 @@
 import { useOvermind } from "../overmind";
 import ImageInputs from "./ImageInputs";
 
-const Form = ({ imageEl, canvas }) => {
+const Form = ({ canvas }) => {
   const { state, actions } = useOvermind();
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        actions.getAndPixelateImage({ imageEl, canvas });
+        actions.getAndPixelateImage({ canvas });
       }}
     >
       <div className="nes-field mb-3">
@@ -37,7 +37,7 @@ const Form = ({ imageEl, canvas }) => {
           value={state.scale}
           onChange={(e) => {
             actions.setScale(e.target.value);
-            if (state.activeImage) actions.pixelImage({ canvas, imageEl });
+            if (state.activeImage) actions.pixelImage({ canvas });
           }}
         />
       </div>
@@ -49,7 +49,7 @@ const Form = ({ imageEl, canvas }) => {
             checked={state.grayscale}
             onChange={() => {
               actions.toggleGrayscale();
-              if (state.activeImage) actions.pixelImage({ canvas, imageEl });
+              if (state.activeImage) actions.pixelImage({ canvas });
             }}
           />
           <span>Grayscale</span>

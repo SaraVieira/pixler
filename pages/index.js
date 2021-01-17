@@ -8,7 +8,6 @@ export default function IndexPage() {
   const { state, effects } = useOvermind();
 
   const canvas = useRef();
-  const imageEl = useRef();
 
   return (
     <div className="bg-gray-100">
@@ -21,10 +20,10 @@ export default function IndexPage() {
       <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-10 pb-10">
         <div className="nes-container is-rounded bg-white  ">
           <div className={`py-5 ${state.activeImage ? "divider" : null}`}>
-            <Form imageEl={imageEl} canvas={canvas} />
+            <Form canvas={canvas} />
           </div>
           <div className=" py-5">
-            <ImageViewer imageEl={imageEl} canvas={canvas} />
+            <ImageViewer canvas={canvas} />
 
             {state.activeImage && (
               <button
