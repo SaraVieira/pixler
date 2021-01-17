@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useOvermind } from "../overmind";
 
 const RangeSlider = ({
@@ -12,6 +13,7 @@ const RangeSlider = ({
   label,
 }) => {
   const { actions, state } = useOvermind();
+  const [stateValue, setStateValue] = useState(value);
   return (
     <>
       <label htmlFor="hue_field">{label}</label>
@@ -24,9 +26,10 @@ const RangeSlider = ({
           min={min}
           max={max}
           step={step}
-          value={value.toString()}
-          onChange={(e) => {
-            onChange(e.target.value);
+          value={stateValue.toString()}
+          onChange={(e) => setStateValue(e.target.value)}
+          onInput={() => {
+            onChange(stateValue);
             if (state.activeImage) actions.pixelImage({ canvas });
           }}
         />

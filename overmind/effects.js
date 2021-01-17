@@ -123,40 +123,43 @@ export const pixel = {
     ctx.drawImage(drawTo, 0, 0, scaledW, scaledH, 0, 0, img.width, img.height);
 
     Caman(drawTo, function () {
+      const that = this;
       if (grayscale) {
-        this.greyscale().render();
+        that.greyscale();
       }
 
       if (sepia) {
-        this.sepia(100).render();
+        that.sepia(100);
       }
 
       if (hue) {
-        this.hue(parseInt(hue)).render();
+        that.hue(parseInt(hue));
       }
 
       if (exposure) {
-        this.exposure(parseInt(exposure)).render();
+        that.exposure(parseInt(exposure));
       }
 
       if (gamma) {
-        this.gamma(parseInt(gamma)).render();
+        that.gamma(parseInt(gamma));
       }
 
       if (noise) {
-        this.noise(parseInt(noise)).render();
+        that.noise(parseInt(noise));
       }
       if (saturation) {
-        this.saturation(parseInt(saturation)).render();
+        that.saturation(parseInt(saturation));
       }
 
       if (vibrance) {
-        this.vibrance(parseInt(vibrance)).render();
+        that.vibrance(parseInt(vibrance));
       }
 
       if (invert) {
-        this.invert().render();
+        that.invert();
       }
+
+      that.render();
     });
   },
 };

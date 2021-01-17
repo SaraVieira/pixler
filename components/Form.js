@@ -129,7 +129,7 @@ const Form = ({ canvas }) => {
             />
 
             <RangeSlider
-              min={-1000}
+              min={-100}
               max={100}
               value={state.saturation}
               canvas={canvas}
