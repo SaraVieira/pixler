@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Pixel Splash</title>
+        <title>Pixelr</title>
       </Head>
       <Provider value={overmind}>
         <Component {...pageProps} />

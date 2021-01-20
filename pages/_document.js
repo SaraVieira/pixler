@@ -11,23 +11,20 @@ class MyDocument extends Document {
       <Html lang="en-us">
         <Head>
           <meta charset="utf-8" />
-          <title>Pixel Splash</title>
+          <title>Pixelr</title>
 
           <meta name="description" content="Convert any image into pixel art" />
-          <meta name="image" content="https://pixelsplash.art/twitter.png" />
+          <meta name="image" content="https://pixelr.art/twitter.png" />
 
-          <meta itemProp="name" content="Pixel Splash" />
+          <meta itemProp="name" content="Pixelr" />
           <meta
             itemProp="description"
             content="Convert any image into pixel art"
           />
-          <meta
-            itemProp="image"
-            content="https://pixelsplash.art/twitter.png"
-          />
+          <meta itemProp="image" content="https://pixelr.art/twitter.png" />
 
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="Pixel Splash" />
+          <meta name="twitter:title" content="Pixelr" />
           <meta
             name="twitter:description"
             content="Convert any image into pixel art"
@@ -35,16 +32,16 @@ class MyDocument extends Document {
           <meta name="twitter:creator" content="@NikkitaFTW" />
           <meta
             name="twitter:image:src"
-            content="https://pixelsplash.art/twitter.png"
+            content="https://pixelr.art/twitter.png"
           />
-          <meta name="og:title" content="Pixel Splash" />
+          <meta name="og:title" content="Pixelr" />
           <meta
             name="og:description"
             content="Convert any image into pixel art"
           />
-          <meta name="og:image" content="https://pixelsplash.art/twitter.png" />
-          <meta name="og:url" content="https://pixelsplash.art/" />
-          <meta name="og:site_name" content="Pixel Splash" />
+          <meta name="og:image" content="https://pixelr.art/twitter.png" />
+          <meta name="og:url" content="https://pixelr.art/" />
+          <meta name="og:site_name" content="Pixelr" />
           <meta name="og:type" content="website" />
           <link
             rel="apple-touch-icon"

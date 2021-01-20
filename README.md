@@ -1,4 +1,4 @@
-# Pixel Splash
+# Pixelr
 
 Convert any image into pixel "art"
 

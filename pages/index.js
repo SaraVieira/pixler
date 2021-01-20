@@ -12,9 +12,9 @@ export default function IndexPage() {
   return (
     <div className="bg-gray-100">
       <header>
-        <img src="/logo.svg" alt="Pixel Splash Logo" />
+        <img src="/logo.svg" alt="Pixelr Logo" />
         <h1 className="nes-text is-primary">
-          Pixel <span style={{ color: "#92cc41" }}>Splash</span>
+          Pix<span style={{ color: "#92cc41" }}>lr</span>
         </h1>
       </header>
       <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-10 pb-10">
