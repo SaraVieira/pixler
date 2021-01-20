@@ -1,2 +1,0 @@
-# Next-on-Netlify Redirects
-/api/photo/:id  /.netlify/functions/next_api_photo_id  200
