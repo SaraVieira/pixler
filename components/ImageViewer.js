@@ -54,12 +54,12 @@ const ImageViewer = ({ canvas }) => {
         <p>
           Photo by{" "}
           <a
-            href={`https://unsplash.com/@${state.unsplashData.user.username}?utm_source=pixelSlash&utm_medium=referral`}
+            href={`https://unsplash.com/@${state.unsplashData.user.username}?utm_source=PixelSplash&utm_medium=referral`}
           >
             {state.unsplashData.user.name}
           </a>{" "}
           on{" "}
-          <a href="https://unsplash.com/?utm_source=pixelSlash&utm_medium=referral">
+          <a href="https://unsplash.com/?utm_source=PixelSplash&utm_medium=referral">
             Unsplash
           </a>
         </p>
