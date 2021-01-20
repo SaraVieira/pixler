@@ -10,7 +10,7 @@ class MyDocument extends Document {
     return (
       <Html lang="en-us">
         <Head>
-          <meta charset="utf-8" />
+          <meta charSet="utf-8" />
           <title>Pixelr</title>
 
           <meta name="description" content="Convert any image into pixel art" />
