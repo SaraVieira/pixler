@@ -14,7 +14,7 @@ export default function IndexPage() {
       <header>
         <img src="/logo.svg" alt="Pixelr Logo" />
         <h1 className="nes-text is-primary">
-          Pix<span style={{ color: "#92cc41" }}>lr</span>
+          Pix<span style={{ color: "#92cc41" }}>elr</span>
         </h1>
       </header>
       <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-10 pb-10">
