@@ -114,6 +114,7 @@ header h1 {
 
 .nes-range {
   width: 100%;
+  cursor: url(https://unpkg.com/nes.css/assets/cursor-click.png), pointer;
   background: transparent;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -127,14 +128,15 @@ header h1 {
 }
 
 .nes-range::-webkit-slider-thumb {
-  width: 4px;
-  height: 4px;
+  width: 24px;
+  height: 24px;
   cursor: url(https://unpkg.com/nes.css/assets/cursor-click.png), pointer;
-  background: #fff;
-  border: 10px solid #000;
-  border-radius: 10px;
+  background: #ffffff url(http://pixelartmaker.com/art/60cb3a757c0224f.png)
+    no-repeat center center;
+  background-size: cover;
+  border-radius: 100%;
   -webkit-appearance: none;
-  transform: translateY(-30%);
+  transform: translateY(-35%) translateX(50%);
 }
 
 .nes-range::-webkit-slider-runnable-track {
@@ -148,7 +150,9 @@ header h1 {
 }
 
 .nes-range.is-green::-webkit-slider-runnable-track {
-  background: #92cc41;
+  background: url(http://pixelartmaker.com/art/df6c91f0e0f038f.png);
+  background-repeat: repeat-x;
+  background-size: auto;
 }
 
 .nes-range.is-yellow::-webkit-slider-runnable-track {
@@ -160,12 +164,16 @@ header h1 {
 }
 
 .nes-range::-moz-range-thumb {
-  width: 4px;
-  height: 4px;
+  width: 24px;
+  height: 24px;
   cursor: url(https://unpkg.com/nes.css/assets/cursor-click.png), pointer;
-  background: #fff;
-  border: 10px solid #000;
-  border-radius: 10px;
+  background: #ffffff url(http://pixelartmaker.com/art/60cb3a757c0224f.png)
+    no-repeat center center;
+  background-size: cover;
+  border: none;
+  outline: none;
+  border-radius: 100%;
+  transform: translateX(50%);
   -webkit-appearance: none;
 }
 
@@ -180,7 +188,9 @@ header h1 {
 }
 
 .nes-range.is-green::-moz-range-track {
-  background: #92cc41;
+  background: url(http://pixelartmaker.com/art/df6c91f0e0f038f.png);
+  background-repeat: repeat-x;
+  background-size: auto;
 }
 
 .nes-range.is-yellow::-moz-range-track {
@@ -192,13 +202,15 @@ header h1 {
 }
 
 .nes-range::-ms-thumb {
-  width: 4px;
-  height: 4px;
+  width: 24px;
+  height: 24px;
   cursor: url(https://unpkg.com/nes.css/assets/cursor-click.png), pointer;
-  background: #fff;
-  border: 10px solid #000;
-  border-radius: 10px;
+  background: #ffffff url(http://pixelartmaker.com/art/60cb3a757c0224f.png)
+    no-repeat center center;
+  background-size: cover;
+  border-radius: 100%;
   -webkit-appearance: none;
+  transform: translateY(-35%) translateX(50%);
 }
 
 .nes-range::-ms-track {
