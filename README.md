@@ -5,8 +5,8 @@ Convert any image into pixel "art"
 ## How to run
 
 ```sh
-git clone git@github.com:<your-username>/pixel-splash.git
-cd pixel-splash
+git clone git@github.com:<your-username>/pixler.git
+cd pixler
 yarn
 yarn dev
 ```
