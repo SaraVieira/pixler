@@ -11,8 +11,6 @@ class MyDocument extends Document {
       <Html lang="en-us">
         <Head>
           <meta charSet="utf-8" />
-          <title>Pixelr</title>
-
           <meta name="description" content="Convert any image into pixel art" />
           <meta name="image" content="https://pixelr.art/twitter.png" />
 
