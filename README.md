@@ -13,7 +13,7 @@ yarn dev
 
 ## Thanks
 
-- Heavily inspired and adapted from [https://github.com/giventofly/pixelit](pixelit)
+- Heavily inspired and adapted from [https://github.com/giventofly/pixelit](https://github.com/giventofly/pixelit)
 - NES.css for being amazing
 
 ## License
