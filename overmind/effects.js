@@ -124,6 +124,8 @@ export const pixel = {
 
     Caman(drawTo, function () {
       const that = this;
+      that.revert();
+
       if (grayscale) {
         that.greyscale();
       }
